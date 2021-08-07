@@ -10,6 +10,10 @@ const getFundingSourcesFixture = require('./fixtures/getFundingSources.json');
 const getFundingSourceFixture = require('./fixtures/getFundingSource.json');
 
 describe('TremendousClient', () => {
+  afterEach(() => {
+    fetchMock.restore();
+  });
+
   test('it throws when not given an accessToken', () => {
     expect(() => new TremendousClient()).toThrowError(/Access token is required/i);
   });
@@ -29,36 +33,36 @@ describe('TremendousClient', () => {
   });
 
   test('getOrganizations', async () => {
-    fetchMock.get('https://example.com/organizations', getOrganizationsFixture);
+    fetchMock.get(/api\/v2\/organizations/, getOrganizationsFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getOrganizations();
 
-    expect(fetchMock.called('https://example.com/organizations')).toBe(true);
+    expect(fetchMock.called(/api\/v2\/organizations/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getOrganizationsFixture);
   });
 
   test('getProducts', async () => {
-    fetchMock.get('https://example.com/products', getProductsFixture);
+    fetchMock.get(/api\/v2\/products/, getProductsFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getProducts();
 
-    expect(fetchMock.called('https://example.com/products')).toBe(true);
+    expect(fetchMock.called(/api\/v2\/products/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getProductsFixture);
   });
 
   test('getOrders', async () => {
-    fetchMock.get('https://example.com/orders', getOrdersFixture);
+    fetchMock.get(/api\/v2\/orders/, getOrdersFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getOrders();
 
-    expect(fetchMock.called('https://example.com/orders')).toBe(true);
+    expect(fetchMock.called(/api\/v2\/orders/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getOrdersFixture);
@@ -66,12 +70,12 @@ describe('TremendousClient', () => {
 
   test('getOrder', async () => {
     const orderId = 'QABSTARTSFSIO';
-    fetchMock.get(`https://example.com/orders/${orderId}`, getOrderFixture);
+    fetchMock.get(/api\/v2\/orders\/QABSTARTSFSIO/, getOrderFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getOrder(orderId);
 
-    expect(fetchMock.called(`https://example.com/orders/${orderId}`)).toBe(true);
+    expect(fetchMock.called(/api\/v2\/orders\/QABSTARTSFSIO/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getOrderFixture);
@@ -79,24 +83,24 @@ describe('TremendousClient', () => {
 
   test('getReward', async () => {
     const rewardId = 'QABSTARTSFSIO';
-    fetchMock.get(`https://example.com/rewards/${rewardId}`, getRewardFixture);
+    fetchMock.get(/api\/v2\/rewards\/QABSTARTSFSIO/, getRewardFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getReward(rewardId);
 
-    expect(fetchMock.called(`https://example.com/rewards/${rewardId}`)).toBe(true);
+    expect(fetchMock.called(/api\/v2\/rewards\/QABSTARTSFSIO/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getRewardFixture);
   });
 
   test('getFundingSources', async () => {
-    fetchMock.get('https://example.com/funding_sources', getFundingSourcesFixture);
+    fetchMock.get(/api\/v2\/funding_sources/, getFundingSourcesFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getFundingSources();
 
-    expect(fetchMock.called('https://example.com/funding_sources')).toBe(true);
+    expect(fetchMock.called(/api\/v2\/funding_sources/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getFundingSourcesFixture);
@@ -104,12 +108,12 @@ describe('TremendousClient', () => {
 
   test('getFundingSource', async () => {
     const fundingSourceId = 'LARFAF2423';
-    fetchMock.get(`https://example.com/funding_sources/${fundingSourceId}`, getFundingSourceFixture);
+    fetchMock.get(/api\/v2\/funding_sources\/LARFAF2423/, getFundingSourceFixture);
 
-    const client = new TremendousClient('1234', 'https://example.com');
+    const client = TremendousClient.createSandbox('1234');
     const res = await client.getFundingSource(fundingSourceId);
 
-    expect(fetchMock.called(`https://example.com/funding_sources/${fundingSourceId}`)).toBe(true);
+    expect(fetchMock.called(/api\/v2\/funding_sources\/LARFAF2423/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getFundingSourceFixture);
