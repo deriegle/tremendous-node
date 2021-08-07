@@ -1,0 +1,17 @@
+{
+  "organizations": [
+    {
+      "id": "ZQBSTARTSFSTW",
+      "name": "Apple Inc",
+      "website": "https://www.apple.com",
+      "access_token": "[ACCESS_TOKEN]"
+    },
+    {
+      "id": "QABSTARTSFSIO",
+      "name": "Apple Inc - Sales Team",
+      "website": "https://www.apple.com",
+      "access_token": "[ACCESS_TOKEN]"
+    }
+  ]
+}
+

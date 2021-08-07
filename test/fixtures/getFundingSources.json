@@ -1,0 +1,21 @@
+{
+  "funding_sources": [
+    {
+      "id": "GCTHLCMFVYMD",
+      "method": "balance",
+      "meta": {
+        "available_cents": 500000,
+        "pending_cents": 0
+      }
+    },
+    {
+      "id": "LARFAF2423",
+      "method": "ach",
+      "meta": {
+        "accountholder_name": "James Bay",
+        "account_number_mask": "6789",
+        "bank_name": "Chase"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "reward": {
+    "id": "fake_reward_id",
+    "value": {
+      "denomination": 30,
+      "currency_code": "USD"
+    },
+    "recipient": {
+      "name": "Denise Miller",
+      "email": "denise@sales.com"
+    },
+    "products": ["HX4U3DQX6GSA"],
+    "delivery": {
+      "method": "EMAIL",
+      "status": "SUCCEEDED"
+    }
+  }
+}

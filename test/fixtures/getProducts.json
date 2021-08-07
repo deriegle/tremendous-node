@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": "HX4U3DQX6GSA",
+      "name":"adidas",
+      "category": "merchant_card",
+      "countries": [
+        {
+          "abbr": "US"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://s3.giftrocket.com/images/adidas"
+        }
+      ],
+      "skus":[
+        {
+          "min":5,
+          "max":250
+        }
+      ]
+    }
+  ]
+}

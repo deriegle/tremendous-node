@@ -1,3 +1,2 @@
-'use strict';
-
-module.exports = require('./lib/index');
+global.fetch = require('node-fetch');
+module.exports = require('./lib/client');

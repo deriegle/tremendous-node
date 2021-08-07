@@ -1,0 +1,11 @@
+{
+  "funding_source": {
+    "id": "LARFAF2423",
+    "method": "ach",
+    "meta": {
+      "accountholder_name": "James Bay",
+      "account_number_mask": "6789",
+      "bank_name": "Chase"
+    }
+  }
+}
