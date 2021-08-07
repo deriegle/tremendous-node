@@ -5,9 +5,7 @@ A node.js client library for the [Tremendous API][1].
 
 ## Installation
 
-```console
-$ npm install tremendous
-```
+(Not currently hosted on npm)
 
 ## Getting started
 
@@ -16,15 +14,14 @@ All API requests require an access token.  A sandbox access token is assigned up
 ### Authentication
 
 ```javascript
-var Tremendous = require('tremendous');
+const TremendousClient = require('tremendous');
 
 // Sandbox environment
-var client = new Tremendous("[SANDBOX_ACCESS_TOKEN]", "https://testflight.tremendous.com/api/v2/");
+const client = TremendousClient.createSandbox('[SANDBOX_ACCESS_TOKEN]');
 
 // Production environment
-var client = new Tremendous("[PRODUCTION_ACCESS_TOKEN]", "https://www.tremendous.com/api/v2/");
+const client = TremendousClient.createProduction('[PRODUCTION_ACCESS_TOKEN]');
 ```
-
 
 ### Orders
 
@@ -34,7 +31,7 @@ See [API documentation][3] for all Order attributes.
 // Create a new order, specifying your gift options
 // as an array of objects.
 
-const order_data = {
+const res = await client.createOrder({
   payment: {
     funding_source_id: "[FUNDING_SOURCE_ID]",
   },
@@ -52,36 +49,52 @@ const order_data = {
       email: "steve@stevens.com"
     }
   }
+});
+
+
+if (res.isSuccess) {
+  console.log(res.data);
+} else {
+  console.log(res.error);
 }
+```
 
-client.createOrder(order_data, function(err, results) {
-  console.log(JSON.stringify(err, null, 2));
-  console.log(JSON.stringify(results, null, 2));
-});
+Get reward
 
+```javascript
 
-// Return a reward by ID
-client.getReward("[REWARD_ID]", function(err, result) {
-  console.log(JSON.stringify(result, null, 2));
-});
+const res = await client.getReward("[REWARD_ID]");
+
+if (res.isSuccess) {
+  console.log(res.data);
+} else {
+  console.log(res.error);
+}
 ```
 
 ### Funding Sources
 Production funding sources must be added through the web dashboard. A sandbox funding source is provided during development.
 
 ```javascript
-// Retrieve a list of your funding sources (credit card, ach, etc).
-client.getFundingSources({}, function(err, results) {
-  console.log(JSON.stringify(results, null, 2));
-});
+const res = await client.getFundingSources();
+
+if (res.isSuccess) {
+  console.log(res.data);
+} else {
+  console.log(res.error);
+}
 ```
 
 ### Products
 
 ```javascript
-client.getProducts({}, function(err, results) {
-  console.log(JSON.stringify(results, null, 2));
-});
+const res = await client.getProducts();
+
+if (res.isSuccess) {
+  console.log(res.data);
+} else {
+  console.log(res.error);
+}
 ```
 
 [1]: https://tremendous.com/docs

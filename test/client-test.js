@@ -54,7 +54,7 @@ describe('TremendousClient', () => {
     })).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(createOrganizationFixture);
+    expect(res.data).toEqual(createOrganizationFixture);
   });
 
   test('getOrganizations', async () => {
@@ -66,7 +66,7 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/organizations/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getOrganizationsFixture);
+    expect(res.data).toEqual(getOrganizationsFixture);
   });
 
   test('getProducts', async () => {
@@ -78,7 +78,7 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/products/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getProductsFixture);
+    expect(res.data).toEqual(getProductsFixture);
   });
 
   test('getOrders', async () => {
@@ -90,7 +90,7 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/orders/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getOrdersFixture);
+    expect(res.data).toEqual(getOrdersFixture);
   });
 
   test('getOrder', async () => {
@@ -103,7 +103,7 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/orders\/QABSTARTSFSIO/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getOrderFixture);
+    expect(res.data).toEqual(getOrderFixture);
   });
 
   test('createOrder', async () => {
@@ -168,7 +168,7 @@ describe('TremendousClient', () => {
     })).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(createOrderFixture);
+    expect(res.data).toEqual(createOrderFixture);
   });
 
   test('getReward', async () => {
@@ -181,7 +181,7 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/rewards\/QABSTARTSFSIO/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getRewardFixture);
+    expect(res.data).toEqual(getRewardFixture);
   });
 
   test('getFundingSources', async () => {
@@ -193,7 +193,7 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/funding_sources/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getFundingSourcesFixture);
+    expect(res.data).toEqual(getFundingSourcesFixture);
   });
 
   test('getFundingSource', async () => {
@@ -206,6 +206,6 @@ describe('TremendousClient', () => {
     expect(fetchMock.called(/api\/v2\/funding_sources\/LARFAF2423/)).toBe(true);
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
-    expect(await res.json()).toEqual(getFundingSourceFixture);
+    expect(res.data).toEqual(getFundingSourceFixture);
   });
 });
