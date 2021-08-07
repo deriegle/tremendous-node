@@ -2,9 +2,11 @@ const TremendousClient = require('../lib/client');
 const fetchMock = require('fetch-mock');
 
 const getOrganizationsFixture = require('./fixtures/getOrganizations.json');
+const createOrganizationFixture = require('./fixtures/createOrganization.json');
 const getProductsFixture = require('./fixtures/getProducts.json');
 const getOrdersFixture = require('./fixtures/getOrders.json');
 const getOrderFixture = require('./fixtures/getOrder.json');
+const createOrderFixture = require('./fixtures/createOrder.json');
 const getRewardFixture = require('./fixtures/getReward.json');
 const getFundingSourcesFixture = require('./fixtures/getFundingSources.json');
 const getFundingSourceFixture = require('./fixtures/getFundingSource.json');
@@ -30,6 +32,29 @@ describe('TremendousClient', () => {
   test('createProduction', () => {
     const client = TremendousClient.createProduction('1234');
     expect(client.uri).toBe('https://www.tremendous.com/api/v2/');
+  });
+
+  test('createOrganization', async () => {
+    fetchMock.post(/api\/v2\/organizations/, createOrganizationFixture);
+
+    const client = TremendousClient.createSandbox('1234');
+    const res = await client.createOrganization({
+      parent_id: 'ABC1234DEFG',
+      name: 'Apple Inc, Sales Team',
+      website: 'https://www.apple.com',
+    });
+
+    expect(fetchMock.called(/api\/v2\/organizations/, {
+      method: 'POST',
+      body: {
+        parent_id: 'ABC1234DEFG',
+        name: 'Apple Inc, Sales Team',
+        website: 'https://www.apple.com',
+      },
+    })).toBe(true);
+    expect(res.isSuccess).toBe(true);
+    expect(res.isError).toBe(false);
+    expect(await res.json()).toEqual(createOrganizationFixture);
   });
 
   test('getOrganizations', async () => {
@@ -79,6 +104,71 @@ describe('TremendousClient', () => {
     expect(res.isSuccess).toBe(true);
     expect(res.isError).toBe(false);
     expect(await res.json()).toEqual(getOrderFixture);
+  });
+
+  test('createOrder', async () => {
+    fetchMock.post(/api\/v2\/orders/, createOrderFixture);
+
+    const client = TremendousClient.createSandbox('1234');
+    const res = await client.createOrder({
+      external_id: "OPTIONAL ID FROM CLIENT SYSTEM",
+      payment: {
+        funding_source_id: "LARFAF2423"
+      },
+      rewards: [
+        {
+          value: {
+            denomination: 30,
+            currency_code: "USD"
+          },
+          campaign_id: "ABCD23424",
+          products: [
+            "Optional array of product IDs that overrides Campaign"
+          ],
+          recipient: {
+            name: "Denise Miller",
+            email: "denise@sales.com"
+          },
+          delivery: {
+            method: "EMAIL",
+            meta: {}
+          }
+        }
+      ]
+    });
+
+    expect(fetchMock.called(/api\/v2\/orders/, {
+      method: 'POST',
+      body: {
+        external_id: "OPTIONAL ID FROM CLIENT SYSTEM",
+        payment: {
+          funding_source_id: "LARFAF2423"
+        },
+        rewards: [
+          {
+            value: {
+              denomination: 30,
+              currency_code: "USD"
+            },
+            campaign_id: "ABCD23424",
+            products: [
+              "Optional array of product IDs that overrides Campaign"
+            ],
+            recipient: {
+              name: "Denise Miller",
+              email: "denise@sales.com"
+            },
+            delivery: {
+              method: "EMAIL",
+              meta: {}
+            }
+          }
+        ]
+      },
+    })).toBe(true);
+    expect(res.isSuccess).toBe(true);
+    expect(res.isError).toBe(false);
+    expect(await res.json()).toEqual(createOrderFixture);
   });
 
   test('getReward', async () => {
