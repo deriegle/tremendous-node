@@ -1,0 +1,8 @@
+{
+  "setupFiles": [
+    "./setupTests.js"
+  ],
+  "testMatch": [
+    "**/test/**/*-test.js"
+  ]
+}

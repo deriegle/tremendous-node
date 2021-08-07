@@ -25,10 +25,14 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "jest": "^27.0.6"
+    "fetch-mock": "^9.11.0",
+    "jest": "^27.0.6",
+    "jest-fetch-mock": "^3.0.3"
   },
   "homepage": "https://github.com/Giftrocket/tremendous-node#readme",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "maintainers": [
     " <developers@tremendous.com>"
   ],
