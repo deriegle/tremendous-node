@@ -1,0 +1,19 @@
+{
+  "orders": [
+    {
+      "id": "QABSTARTSFSIO",
+      "external_id": "[ID FROM CLIENT]",
+      "status": "EXECUTED",
+      "payment": {
+        "subtotal": 25.0,
+        "total": 25.5,
+        "fees": 0.5
+      },
+      "rewards": [
+        {
+          "id": "DDABSUKSFSTY"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "order": {
+    "id": "fake_order_id",
+    "external_id": "[ID FROM CLIENT]",
+    "status": "CART",
+    "payment": {
+      "subtotal": 25.0,
+      "total": 25.5,
+      "fees": 0.5
+    },
+    "rewards": [
+      {
+        "id": "DDABSUKSFSTY"
+      }
+    ]
+  }
+}
